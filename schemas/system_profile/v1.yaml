@@ -1,6 +1,10 @@
 ---
 $id: system_profile.spec.yaml
 $version: 1
+type: object
+properties:
+  system_profile:
+    $ref: '#/$defs/SystemProfile'
 $defs:
   DiskDevice:
     title: Disk Device
@@ -140,10 +144,29 @@ $defs:
         type: array
       os_release:
         type: string
+      rhel_release_name:
+        type: string
+        enum:
+          - Tikanga
+          - Santiago
+          - Maipo
+          - Ootpa
+      rhel_version:
+        type: string
+        pattern: "^[0-9]{1,}\\.[0-9]{1,}$"
+      rhel_major_version:
+        type: integer
+      rhel_minor_version:
+        type: integer
       os_kernel_version:
         type: string
       arch:
         type: string
+        enum:
+          - x86
+          - x86_64
+          - ia64
+          - armv4
       kernel_modules:
         type: array
         items:
