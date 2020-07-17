@@ -21,3 +21,8 @@ the Host Inventory.
 [Host Inventory]: https://github.com/RedHatInsights/insights-host-inventory/
 [System Profile]: schemas/system_profile/
 [OpenAPI 3.0]: https://swagger.io/specification/
+
+
+## How to run ##
+As a first step initialize venv by running `bash tools/init.sh` after entering into the `inventory-schemas`
+Then do `bash tools/run.sh` to see the performance comparision with and without caching the schema instance.

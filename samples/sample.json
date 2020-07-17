@@ -1,0 +1,83 @@
+{
+    "id": "85c80396-0e54-4b55-ba49-6e31771095b0",
+    "system_profile": {
+      "arch": "x86_64",
+      "cpu_flags": [
+        "fpu",
+        "vme",
+        "de"
+      ],
+      "yum_repos": [
+        {
+          "id": "epel-testing",
+          "name": "Extra Packages for Enterprise Linux 7 - Testing - $basearch",
+          "enabled": false,
+          "gpgcheck": true
+        }
+      ],
+      "os_release": "7.6",
+      "bios_vendor": "SeaBIOS",
+      "bios_version": "1.11.0-2.el7",
+      "captured_date": "2020-05-22T07:51:18+00:00",
+      "kernel_modules": [
+        "tcp_diag",
+        "udp_diag"
+      ],
+      "last_boot_time": "2020-04-06T16:18:18",
+      "number_of_cpus": 2,
+      "cores_per_socket": 1,
+      "enabled_services": [
+        "auditd",
+        "autovt@",
+        "brandbot"
+      ],
+      "bios_release_date": "04/01/2014",
+      "number_of_sockets": 2,
+      "os_kernel_version": "3.10.0",
+      "running_processes": [
+        "xfs-log/vda1",
+        "kpsmoused",
+        "scsi_tmf_1",
+        "scsi_eh_1"
+      ],
+      "satellite_managed": false,
+      "installed_packages": [
+        "GeoIP-0:1.5.0-13.el7.x86_64",
+        "NetworkManager-1:1.12.0-10.el7_6.x86_64",
+        "NetworkManager-config-server-1:1.12.0-10.el7_6.noarch",
+        "NetworkManager-libnm-1:1.12.0-10.el7_6.x86_64",
+        "NetworkManager-ppp-1:1.12.0-10.el7_6.x86_64"
+      ],
+      "installed_products": [
+        {
+          "id": "69"
+        }
+      ],
+      "installed_services": [
+        "arp-ethers",
+        "auditd",
+        "autovt@",
+        "blk-availability"
+      ],
+      "network_interfaces": [
+        {
+          "mtu": "1500",
+          "name": "eth0",
+          "type": "ether",
+          "state": "UP",
+          "mac_address": "56:6f:e3:b8:00:0d",
+          "ipv4_addresses": [
+            "10.9.117.85"
+          ],
+          "ipv6_addresses": [
+            "fe80::546f:e3ff:feb8:d"
+          ]
+        }
+      ],
+      "infrastructure_type": "virtual",
+      "system_memory_bytes": 2026340352,
+      "insights_egg_version": "3.0.165-1",
+      "infrastructure_vendor": "rhev",
+      "insights_client_version": "3.0.3-9"
+    }
+  }
