@@ -61,7 +61,7 @@
       ],
       "network_interfaces": [
         {
-          "mtu": "1500",
+          "mtu": 1500,
           "name": "eth0",
           "type": "ether",
           "state": "UP",
