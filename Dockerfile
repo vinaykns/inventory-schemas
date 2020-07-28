@@ -14,4 +14,3 @@ RUN cd /home/inventory-schemas/; rm -rf tools/venv; bash tools/init.sh
 STOPSIGNAL SIGRTMIN+3
 
 CMD ["sleep", "infinity"]
-

@@ -5,3 +5,4 @@ pyrsistent==0.16.0
 PyYAML==5.3.1
 six==1.15.0
 zipp==3.1.0
+marshmallow~=2.19.5
