@@ -50,13 +50,8 @@ def marshmallow_validation(sample_path):
     print(f'Completed validation test, took {diff} ms')
     return diff
 
-
-def main():
-    plain_schema_path = sys.argv[1]
-    regex_schema_path = sys.argv[2]
-    sample_path = sys.argv[3]
-
-    print(plain_schema_path, regex_schema_path, sample_path)
+# dryrun runs the dry run which is used to compute just the validation overhead.
+def dryrun(sample_path):
     result1 = []
     print("Execute donothing codeblock")
     for _ in range(10):
@@ -66,7 +61,9 @@ def main():
     print("Completed running donothing function")
     print(result1)
     helper.print_stats(result1)
+    return result1
 
+def plainvalidation(plain_schema_path, sample_path, result1):
     print("Execute validation with primitive schema")
     result2 = []
     for _ in range(10):
@@ -80,7 +77,10 @@ def main():
     print("Completed running the validation with primitive schema")
     result2 = helper.get_validation_overhead(result1, result2)
     helper.print_stats(result2)
+    return result2
 
+
+def regexvalidation(regex_schema_path, sample_path, result1):
     print("Execute validation with regex schema")
     result3 = []
     for _ in range(10):
@@ -94,15 +94,9 @@ def main():
     print("Completed running the validation with regex schema")
     result3 = helper.get_validation_overhead(result1, result3)
     helper.print_stats(result3)
+    return result3
 
-    count = 0
-    for i in range(10):
-        if result3[i] > result2[i]:
-            count +=1 
-    
-    print(f'Number of samples where regex validation is taking more time {count} \
-        vs primitive validation {10 - count}')
-    
+def marshmallow_schema(sample_path, result1):
     print("Execute validation with marshmallow schema")
     result4 = []
     for _ in range(10):
@@ -111,11 +105,37 @@ def main():
     print("Completed running the validation with marshmallow")
     result4 = helper.get_validation_overhead(result1, result4)
     helper.print_stats(result4)
+    return result4
 
+def get_statistics(result1, result2, result3, result4):
+    count = 0
+    for i in range(10):
+        if result3[i] > result2[i]:
+            count +=1 
+    
+    print(f'Number of samples where regex validation is taking more time {count} \
+        vs primitive validation {10 - count}')
+    
     primistomarsh = statistics.mean(result2) / statistics.mean(result4)
     regexistomarsh = statistics.mean(result3) / statistics.mean(result4)
     print(f'primistomarsh: {primistomarsh}, regexistomarsh: {regexistomarsh}')
 
-        
+
+def main():
+    plain_schema_path = sys.argv[1]
+    regex_schema_path = sys.argv[2]
+    sample_path = sys.argv[3]
+    print(plain_schema_path, regex_schema_path, sample_path)
+
+    result1 = dryrun(sample_path)
+
+    result2 = plainvalidation(plain_schema_path, sample_path, result1)
+
+    result3 = regexvalidation(regex_schema_path, sample_path, result1)
+
+    result4 = marshmallow_schema(sample_path, result1)
+
+    get_statistics(result1, result2, result3, result4)
+
 if __name__ == "__main__":
     main()
