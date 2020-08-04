@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 
 import json
+import sys
 
 profiles = []
 sys_profiles = {}
-f = open('sample.original.json', 'r').read()
+sample_path = sys.argv[1]
+
+f = open(sample_path, 'r').read()
 data = json.loads(f)
 for each in data:
     _system_profile = each['_system_profile']

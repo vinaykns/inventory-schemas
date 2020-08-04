@@ -24,5 +24,7 @@ the Host Inventory.
 
 
 ## How to run ##
-As a first step initialize venv by running `bash tools/init.sh` after entering into the `inventory-schemas`
-Then do `bash tools/run.sh` to see the performance comparision with and without caching the schema instance.
+1. Please check your email for the host record generator data.
+1. From a massive host record generator data file extract all the system_profiles by running `cd $(pwd)/inventory-schemas/samples && python3 extract_sys_profile.py $path_to_massive_file`
+2. Initialize venv by running `bash tools/init.sh` after entering into the `inventory-schemas` directory.
+3. Then do `bash tools/run.sh` to see the performance comparision results with using regex patterns, jsonschema and marshmallow libraries.

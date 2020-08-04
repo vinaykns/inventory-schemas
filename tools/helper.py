@@ -1,8 +1,7 @@
-from datetime import date
+import yaml
 import json
 from marshmallow import Schema, fields, pprint
 from marshmallow import validate
-from marshmallow import validates
 from marshmallow import ValidationError
 import os
 import sys
@@ -96,43 +95,30 @@ class SystemProfileSchema(Schema):
     enabled_services = fields.List(fields.Str(validate=validate.Length(max=512)))
     sap_system = fields.Bool()
 
+
+# donothing does nothing much except loading a file, reading it and streaming data to /dev/null
+def donothing(sample_path):
+    start = time.time()
+    sample_data = open(sample_path, 'r').read()
+    sample_dict = json.loads(sample_data)
+    write_to_null = open('/dev/null', 'w')
+    write_to_null.write(json.dumps(sample_dict))
+    end = time.time()
+    diff = (end - start) * 1000
+    return diff
+
+# print_stats displays the statistics among list of numbers
 def print_stats(numbers):
     print("\tBEST  ", min(numbers))
     print("\tMEDIAN", statistics.median(numbers))
     print("\tMEAN  ", statistics.mean(numbers))
     print("\tSTDEV ", statistics.stdev(numbers))
 
-# validation function runs the validation test against the schema.
-def validation(sample_path):
-    schema = SystemProfileSchema()
-    f = open(sample_path, 'r').read()
-    data = json.loads(f)
-    samples = data['system_profiles']
-    start = time.time()
 
-    for sample in samples:
-        result = schema.validate(sample['system_profile'])
-        if result:
-            print(result)
+# get_validation_overhead calculates the time taken for just data validation
+def get_validation_overhead(prereqsteps, totalsteps):
+    result = []
+    for i in range(len(prereqsteps)):
+        result.append(totalsteps[i] - prereqsteps[i])
     
-    write_to_null = open('/dev/null', 'w')
-    write_to_null.write(json.dumps(data))
-    end = time.time()
-    diff = (end - start) * 1000
-    print(f'Completed validation test, took {diff} ms')
-    return diff
-
-# this script validates the sample data against the marshmallow schema.
-def main():
-    sample_path = sys.argv[1]
-    results = []
-    for _ in range(25):
-        results.append(validation(sample_path))
-    
-    print(results)
-    print_stats(results)
-
-
-if __name__ == "__main__":
-    main()
-
+    return result
