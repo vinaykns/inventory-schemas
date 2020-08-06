@@ -114,7 +114,7 @@ $defs:
         type: integer
       system_memory_bytes:
         type: integer
-        format: int64
+        #format: int64
       infrastructure_type:
         type: string
       infrastructure_vendor:
@@ -149,7 +149,7 @@ $defs:
           type: string
       last_boot_time:
         type: string
-        format: date-time
+        #format: date-time
       running_processes:
         type: array  # techincally a set, ordering is not important
         items:
